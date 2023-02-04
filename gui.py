@@ -63,14 +63,13 @@ class gui_main:
             print("connected")
             self.t=1
         except:
-            self.t=0
-        finally:
-            if(self.t==0):
-                messagebox.showerror("error ","sorry client is not reponded")
-                self.login()
-            else:
-                messagebox.showinfo("sucess","connected")
-                self.main_page()
+            print("what")
+        if(self.t==0):
+            messagebox.showerror("error ","sorry client is not reponded")
+            self.login()
+        else:
+            messagebox.showinfo("sucess","connected")
+            self.main_page()
 
     def main_page(self):
         self.frame3=Frame(self.frame1)
@@ -81,21 +80,35 @@ class gui_main:
         self.text1.place(x=150,y=704,width=1250,height=40)
         self.label4=Label(self.frame3,text="message:",font=("bold",22))
         self.label4.place(x=10,y=705)
+        self.t2=Thread(target=self.recive_data)
+        self.t2.start()
         self.button1=Button(self.frame3,text=">>>",font=("bold",15),bg="light green",command=self.insert_into)
         self.button1.place(x=1400,y=705,width=100,height=40)
+    def rcvt(self):
+        self.t2=Thread(target=self.recive_data)
+        self.t2.start()
     def insert_into(self):
         n=100
         self.text.config(state=NORMAL)
         self.tex=self.text1.get(1.0,END)
-        self.text.insert(INSERT,f"\t\t\t\t\t\t\t\t\t\t\t\t\t{self.tex}")
         self.text1.delete(1.0,END)
-        self.text.config(state=DISABLED) 
-
-    
-    
+        self.rcvt()
+        self.send_data(self.tex)
+    def send_data(self,data):
+        self.data=data.encode()
+        self.cons.send(self.data)
+        self.text.insert(INSERT,f"\t\t\t\t\t\t\t\t\t\t\t\t\t{self.tex}")
+        self.text.config(state=DISABLED)
+    def recive_data(self):
+        self.rc=self.cons.recv(1000)
+        self.text.config(state=NORMAL)
+        while(self.rc):
+            self.data=self.rc.decode()
+            self.text.insert(INSERT,f"{self.data}")
+            self.rc=self.cons.recv(1000)
+        self.text.config(state=DISABLED)
+        sleep(1)
         
-            
-
 root=tkinter.Tk()
 root.geometry("2600x1600")
 gui_main(root)
