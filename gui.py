@@ -51,7 +51,8 @@ class gui_main:
             self.soc=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
             r=askyesno("info","do you want to wait for 60s or exit ")
             if(r):
-                self.soc.settimeout(120)
+                print("iam")
+                self.soc.settimeout(60)
             else:
                 sys.exit(0)
             print("wairting")
@@ -62,8 +63,8 @@ class gui_main:
             self.cons,self.add=self.soc.accept()
             print("connected")
             self.t=1
-        except:
-            print("what")
+        except Exception as ex:
+            print(str(ex))
         if(self.t==0):
             messagebox.showerror("error ","sorry client is not reponded")
             self.login()
