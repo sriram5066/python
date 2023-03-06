@@ -1,0 +1,88 @@
+<PageLayout>:
+	FloatLayout:
+		BoxLayout:
+			orientation: "vertical"
+			size: root.width, root.height
+			padding: 50
+			spacing: 20
+			RoundedButton:
+				text:"connect to pc"
+            	pos_hint: {'center_x': 0.5}
+            	size_hint: (1, .3)
+            	on_press:root.connect()
+			RoundedButton:
+				text:"immediate shutdown"
+            	pos_hint: {'center_x': 0.5}
+            	size_hint: (1, .3)
+            	on_press:root.ishutdown()
+			RoundedButton:
+				text:"immediate restart"
+            	pos_hint: {'center_x': 0.5}
+            	size_hint: (1, .3)
+            	on_press:root.irestart()
+			RoundedButton:
+				text:"wifi"
+            	pos_hint: {'center_x': 0.5}
+            	size_hint: (1, .3)
+            	on_press:root.wifi()
+	BoxLayout:
+		orientation: "vertical"
+		size: root.width, root.height
+		padding: 50
+		spacing: 20
+		RoundedButton:
+			text:"whatsapp"
+			pos_hint: {'center_x': 0.5}
+			size_hint: (1, .3)
+			on_press:root.whatsapp()
+		RoundedButton:
+			text:"document"
+			pos_hint: {'center_x': 0.5}
+			size_hint: (1, .3)
+			on_press:root.document()
+		RoundedButton:
+			text:"devc"
+			pos_hint: {'center_x': 0.5}
+			size_hint: (1, .3)
+			on_press:root.devc()
+		RoundedButton:
+			text:"Desktop"
+			pos_hint: {'center_x': 0.5}
+			size_hint: (1, .3)
+			on_press:root.desktop()
+	BoxLayout:
+		orientation: "vertical"
+		size: root.width, root.height
+		padding: 50
+		spacing: 20
+		RoundedButton:
+			text:"restart"
+			pos_hint: {'center_x': 0.5}
+			size_hint: (1, .3)
+			on_press:root.restart()
+		RoundedButton:
+			text:"sleep"
+			pos_hint: {'center_x': 0.5}
+			size_hint: (1, .3)
+			on_press:root.sleep()
+		RoundedButton:
+			text:"shutdown"
+			pos_hint: {'center_x': 0.5}
+			size_hint: (1, .3)
+			on_press:root.shutdown()
+		RoundedButton:
+			text:"logout"
+			pos_hint: {'center_x': 0.5}
+			size_hint: (1, .3)
+			on_press:root.logout()
+
+<RoundedButton@Button>
+	background_color: (0,0,0,0)
+	background_normal: ''
+	canvas.before:
+		Color:
+			rgba: (48/255,84/255,150/255,1)
+		RoundedRectangle:
+			size: self.size
+			pos: self.pos
+			radius: [90]
